@@ -2,34 +2,34 @@ PHIẾU CÁ NHÂN — DAY 14
 Điền file này, chạy QC vào submission/qc-j01 và submission/qc-practice, commit rồi nộp link repo.
 Không dán ảnh, toạ độ điểm hay nội dung file export vào đây.
 
-Họ tên / mã học viên:
-Object J01 (a/b/c/d theo docs/cases.md) / track ID trong task J01:
-Phiên bản CVAT / overlay đã bật (có/không):
+Họ tên / mã học viên: Phan Khánh Hoàng / 2A202602290
+Object J01 (a/b/c/d theo docs/cases.md) / track ID trong task J01: J01-a / track_id 0 (theo qc_tracks.csv)
+Phiên bản CVAT / overlay đã bật (có/không): 2.75.1 / có (overlay báo "verified on v2.74.1", đã kiểm thấy khung chiếu trên image_1)
 
 J01 — TRACK LÕI
-Frame fit và lý do:
-L / W / H (m):
-Keyframe quan trọng và lý do:
-Đã bấm F qua đủ frame 0–65 (có/không):
-Đoạn thưa / che khuất / dễ nhầm identity:
+Frame fit và lý do: Frame 30 (xe cách ~10 m, là keyframe) vì cụm điểm của xe rõ nhất, nhìn được ranh giới thân xe để xác lập L/W/H.
+L / W / H (m): 4.45 / 1.61 / 1.72
+Keyframe quan trọng và lý do: 11 keyframe tại frame 0, 15, 25, 30, 35, 40, 45, 50, 55, 60, 65. Frame 0 = đầu track, frame 65 = cuối track. Frame 15, 25, 30, 35 nằm ở đoạn xe rẽ (heading đổi khoảng -13°, -9°, -2°, -4° giữa các keyframe liên tiếp, tổng ~29°), cần mốc để quỹ đạo nội suy bám theo cụm điểm. Frame 40–60 (mỗi 5 frame) ở đoạn xe đi thẳng (heading đổi ≤ 0.6°), đặt định kỳ để giữ tâm hộp bám cụm điểm; tốc độ đều ~1.5–1.6 m/frame nên không cần thêm mốc.
+Đã bấm F qua đủ frame 0–65 (có/không): Có
+Đoạn thưa / che khuất / dễ nhầm identity: Xe ở xa nhất ~50 m tại frame 0, 64, 65 (điểm thưa, giữ nguyên L/W/H tham chiếu); gần nhất ~8 m tại frame 33–35. Không có frame nào đánh dấu occluded. Track giữ một ID xuyên suốt 66 frame; QC không báo id_switch_risk hay position_jump.
 
 SELF-QC (từ qc_tracks.csv / qc_flags.csv)
-Lần QC đầu — cờ của track J01 (loại, frame):
-Quyết định cho từng cờ (sửa / giữ vì hợp lệ / chưa đủ evidence) và lý do:
-Đã sửa gì sau QC đầu; QC cuối còn cờ nào:
-Nhận xét của bạn cùng cặp và bạn đồng ý/không đồng ý vì sao:
+Lần QC đầu — cờ của track J01 (loại, frame): Không có cờ (qc_flags.csv trống). qc_tracks: 66 frame (0–65), 11 keyframe, không có gap, L/W/H_drift = 0, yaw_step_max 1.15°, pos_step_max 1.61 m, range 8.5–50.4 m.
+Quyết định cho từng cờ (sửa / giữ vì hợp lệ / chưa đủ evidence) và lý do: Không có cờ cần xử lý. Đoạn khó đã tự xem bằng mắt: frame 65 (~50 m, ít điểm): hộp giữ kích thước tham chiếu, overlay hơi lệch do điểm thưa, quyết định giữ (chi tiết ở mục CAMERA–LIDAR).
+Đã sửa gì sau QC đầu; QC cuối còn cờ nào: Không sửa thêm sau QC đầu (bản export cuối cho kết quả giống QC đầu). QC cuối J01: không có cờ.
+Nhận xét của bạn cùng cặp và bạn đồng ý/không đồng ý vì sao: Không có bạn cùng cặp nên chưa thực hiện bước đổi màn hình review.
 
 CAMERA–LIDAR (overlay trên image_1)
-Ca bình thường (frame / quan sát):
-Ca khó (frame / quan sát 2D / quan sát 3D):
-Giả thuyết nguyên nhân (annotation / FOV / occlusion / sparse / nghi calibration / chưa đủ evidence):
-Hành động (sửa / giữ / báo Lab Coach) và lý do:
+Ca bình thường (frame / quan sát): Frame 30 (xe ~10 m, frame tham chiếu) / khung chiếu trên image_1 khớp với xe.
+Ca khó (frame / quan sát 2D / quan sát 3D): Frame 65 / 2D: khung chiếu hơi lệch so với xe trên ảnh / 3D: xe ở ~50 m (xa nhất của track), ít điểm; hộp vẫn giữ kích thước tham chiếu 4.45 / 1.61 / 1.72 m.
+Giả thuyết nguyên nhân (annotation / FOV / occlusion / sparse / nghi calibration / chưa đủ evidence): Sparse. Lệch chỉ thấy ở frame xa, còn frame 30 khớp, nên không phải lệch hệ thống của calibration; ở ~50 m ít điểm nên tâm và heading khó xác định chính xác.
+Hành động (sửa / giữ / báo Lab Coach) và lý do: Giữ. Kích thước và vị trí dựa trên point cloud và kích thước tham chiếu từ frame 30; không kéo hộp theo ảnh. Không báo Coach vì không thấy nhiều object lệch cùng chiều.
 
 CASE NGẮN (task practice)
-Case → track ID (ví dụ B01 → 3):
-Case đã xong:
-Case đang dở / chỗ kẹt:
-fragmentation_suspect ở đầu/cuối case đã kiểm là do cách cắt case (có/không):
+Case → track ID (ví dụ B01 → 3): B01 → 2 (ID trên thẻ track CVAT; track_id 0 trong submission/qc-practice)
+Case đã xong: B01
+Case đang dở / chỗ kẹt: Không làm thêm case ngắn; ưu tiên hoàn thành phần bắt buộc (J01, QC, đối chiếu Camera–LiDAR).
+fragmentation_suspect ở đầu/cuối case đã kiểm là do cách cắt case (có/không): Có. QC practice báo 2 cờ fragmentation_suspect của B01 tại frame 16 (đầu case) và frame 21 (cuối case), đúng khoảng frame 16–21 của case nên không phải lỗi.
 
 THỜI GIAN
-J01 / case ngắn / QC và fusion:
+J01 / case ngắn / QC và fusion: ~45 phút / ~30 phút (chỉ B01) / ~30 phút (ước lượng theo mốc thời gian trên CVAT)
